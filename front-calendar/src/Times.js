@@ -1,11 +1,20 @@
 import React from 'react'
 import {useState} from 'react';
 import './Calendar.css';
+import { Form } from './Form';
 
 const time = ['09:00 to 09:15','10:00 to 10:15','11:00 to 11:15',
               '09:15 to 09:30','10:15 to 10:30', '11:15 to 11:30',
               '09:30 to 09:45', '10:30 to 10:45', '11:30 to 11:45']
-// let cpt = 0
+
+
+// let dataArr = []
+
+
+// function onlyUnique(value, index, self) {
+//   return self.indexOf(value) === index;
+// }
+
 function Times(props) {
 
  const [event, setEvent] = useState(null)
@@ -24,16 +33,11 @@ function parseDate(dates) {
   const end = creneau[2]
   console.log(start)
   console.log(end)
+  // dataArr.push(start)
+  // dataArr.push(end)
+  // console.log(dataArr)
 }
 
-function InputTitle(props) {
-  return (
-    <div style={{float: 'left', marginTop: 10}}>
-      <label htmlFor='titleEvent'>title: </label>
-      <input type="texte" id="titre" name="titres" />
-    </div>
-  )
-}
 
 return (
  
@@ -48,7 +52,7 @@ return (
             )
           })}
         </div>
-          {info ? <InputTitle /> : null}
+          {info ? <Form /> : null}
       </div>
 
        <p style={{float : 'left'}}>
@@ -58,4 +62,5 @@ return (
      )
 }
 
+// export {dataArr}
 export default Times;

@@ -24,7 +24,9 @@ return (
           {' '} to {' '}
           <span>End:</span> {date[1].toDateString()}
         </p>
+
         ) : (
+        
         <p>
           <span>Selected date:</span>{' '} {date.toDateString()}
         </p>
