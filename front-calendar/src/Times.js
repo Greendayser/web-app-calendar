@@ -2,18 +2,12 @@ import React from 'react'
 import {useState} from 'react';
 import './Calendar.css';
 import { Form } from './Form';
+import { useForm } from "react-hook-form";
+import { dataArr } from './App';
 
 const time = ['09:00 to 09:15','10:00 to 10:15','11:00 to 11:15',
               '09:15 to 09:30','10:15 to 10:30', '11:15 to 11:30',
               '09:30 to 09:45', '10:30 to 10:45', '11:30 to 11:45']
-
-
-// let dataArr = []
-
-
-// function onlyUnique(value, index, self) {
-//   return self.indexOf(value) === index;
-// }
 
 function Times(props) {
 
@@ -31,36 +25,43 @@ function parseDate(dates) {
   const creneau = dates.split(' ')
   const start = creneau[0]
   const end = creneau[2]
-  console.log(start)
-  console.log(end)
-  // dataArr.push(start)
-  // dataArr.push(end)
-  // console.log(dataArr)
+  dataArr.add(start)
+  dataArr.add(end)
 }
 
+const { register, handleSubmit } = useForm();
+  const onSubmit = data => console.log(data);
 
 return (
  
     <div className='times'>
       <div className='ButtonTitle'>
         <div className='Bouton' >
-        {time.map((currTime) => {
-        return (
-        <div>
-          <button style={{ color: "black", backgroundColor: "#decddd", float: 'left'}} onClick={(e)=> displayInfo(e)}> {currTime} </button>
-        </div>
-            )
-          })}
+
+          <form onSubmit={handleSubmit(onSubmit)}>
+
+            <label htmlFor='timeSlot'>Select a time slot: </label>
+            <select {...register("timeSlot")}>
+
+              {time.map((currTime) => {
+                return <option value={currTime} onClick={(e) => displayInfo(e)}>{currTime}</option>
+              })}
+
+            </select>
+
+          </form>
         </div>
           {info ? <Form /> : null}
+          
       </div>
 
-       <p style={{float : 'left'}}>
+        
+       <p style={{float : 'left', marginRight: 15}}>
          {info ? `Your appointment is set from: ${event} ${props.date.toDateString()}` : null}
        </p>
+       
     </div>
      )
 }
 
-// export {dataArr}
 export default Times;

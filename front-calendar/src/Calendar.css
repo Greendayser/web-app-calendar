@@ -5,7 +5,8 @@
 } */
 
 .app {
-    background:powderblue;
+    background-image: url("../public/background2.jpg");
+    background-repeat: no-repeat;
     position:absolute;
     top:0px;
     right:0px;
@@ -19,10 +20,11 @@
 
 .calendar-container {
     padding:20px;
-    background-color:#decddd;
+    background-color:#727737;
+    
     float:left;
     margin: 0;
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
@@ -48,6 +50,8 @@
 
 
 .react-calendar {
+    position: relative;
+    margin-left: 15px;
     width: 400px;
     max-width: 100%;
     background-color: #fff;
