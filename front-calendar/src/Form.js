@@ -7,7 +7,7 @@ function parseData(data) {
     let mail = data.email
     dataArr.add(title)
     dataArr.add(mail)
-    // console.log(dataArr)
+    console.log(dataArr)
     //here going to post data to backend
     return dataArr
 }
