@@ -34,13 +34,13 @@ public class Controller {
     }
 
     @GetMapping("availabilities/get/day/{slotDate}") //slotDate = date of the day select in the front
-    public Collection<Optional<AvailabilitiesModel>> getAvailabiltiesOfDay(@PathVariable("slotDate") String date)
+    public Collection<Optional<AvailabilitiesModel>> getAvailabilitiesOfDay(@PathVariable("slotDate") String date)
     {
         return availabilityService.getAvailabilityOfDay(date);
     }
 
     @PostMapping("/availabilities/post")
-    public void createAvailabilty(@RequestBody AvailabilitiesModel availabilitiesModel) {
+    public void createAvailability(@RequestBody AvailabilitiesModel availabilitiesModel) {
         availabilityService.addNewAvailability(availabilitiesModel);
     }
 

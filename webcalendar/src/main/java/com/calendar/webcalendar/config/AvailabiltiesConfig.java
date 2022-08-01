@@ -49,9 +49,25 @@ public class AvailabiltiesConfig {
     CommandLineRunner commandLineRunnerAvailabilities(AvailabilitiesRepository availabilityRepository) {
         return args -> {
             //need to find a way to convert Sat Jul 30 2022 in front to 2022-07-30 the localDateFormat => then change attribut to String to LocalDate in model
-            AvailabilitiesModel slot1 = new AvailabilitiesModel(LocalDate.of(2022, Month.JULY, 30), "09:00", "09:15"); //"Sat Jul 30 2022" => "2022-07-30"
+            AvailabilitiesModel slot1 = new AvailabilitiesModel(
+                    LocalDate.of(
+                            LocalDate.now().getYear(),
+                            LocalDate.now().getMonth().plus(1),
+                            LocalDate.now().getDayOfMonth()
+                    ),
+                    "09:00",
+                    "09:15"
+            ); //"Sat Jul 30 2022" => "2022-07-30"
 
-            AvailabilitiesModel slot2 = new AvailabilitiesModel(LocalDate.of(2022, Month.JULY, 29), "09:15", "09:30"); // "Fri Jul 29 2022" => 2022-07-29
+            AvailabilitiesModel slot2 = new AvailabilitiesModel(
+                    LocalDate.of(
+                            2022,
+                            Month.JULY,
+                            29
+                    ),
+                    "09:15",
+                    "09:30"
+            ); // "Fri Jul 29 2022" => 2022-07-29
 
             var creneaux = getLocalDateOfActualYear();
 

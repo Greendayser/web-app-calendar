@@ -18,7 +18,11 @@ public class ReservationsConfig {
     CommandLineRunner commandLineRunnerReservation(ReservationsRepository reservationsRepository) {
         return args -> {
             ReservationsModel slot1 = new ReservationsModel(
-                    LocalDate.of(2022, Month.AUGUST, 5),
+                    LocalDate.of(
+                            LocalDate.now().getYear(),
+                            LocalDate.now().getMonth(),
+                            LocalDate.now().getDayOfMonth()
+                    ),
                     "11:00",
                     "11:15",
                     "Meeting",
@@ -26,7 +30,11 @@ public class ReservationsConfig {
             );
 
             ReservationsModel slot2 = new ReservationsModel(
-                    LocalDate.of(2022, Month.AUGUST, 8),
+                    LocalDate.of(
+                            LocalDate.now().getYear(),
+                            LocalDate.now().getMonth(),
+                            LocalDate.now().getDayOfMonth() + 1
+                    ),
                     "11:30",
                     "11:45",
                     "Meeting",
