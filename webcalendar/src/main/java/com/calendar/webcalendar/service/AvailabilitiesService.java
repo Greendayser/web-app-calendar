@@ -5,6 +5,8 @@ import com.calendar.webcalendar.repository.AvailabilitiesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +20,7 @@ public class AvailabilitiesService {
     }
 
     @Autowired
-    public List<AvailabilitiesModel> getAvailability() {
+    public List<AvailabilitiesModel> getAllAvailabilities() {
         return availabilityRepository.findAll();
     }
 
@@ -32,12 +34,39 @@ public class AvailabilitiesService {
         //si elle est pas presente dans reservation alors je peux la cree
         //si elle est dans reservation ou availabilties alors je la cree pas
         if (availableByDateAndStart.isPresent()) {
-            throw new IllegalStateException("this availabilitySlot (Date and Start) is not available: availability empty in database");
+            throw new IllegalStateException("this availability slot (Date and Start) is already present");
         }
 
+        //save new availability in the calendar database
         availabilityRepository.save(availabilitiesModel);
 
         System.out.println(availabilitiesModel);
+    }
+
+    public void deleteSlotAvailability(Long AvailabilityId) {
+        boolean exists = availabilityRepository.existsById(AvailabilityId);
+        if (!exists) {
+            throw new IllegalStateException("availabilty slot with id " + AvailabilityId + " does not exists");
+        }
+        availabilityRepository.deleteById(AvailabilityId);
+
+    }
+
+    public Collection<Optional<AvailabilitiesModel>> getAvailabilityOfDay(String date) {
+
+        // convert string with format 2016-08-16 to localDate with the same format
+        LocalDate localDate = LocalDate.parse(date);
+
+        Collection<Optional<AvailabilitiesModel>> availabilitiesOfDay = availabilityRepository
+                .findAvailabilitiesModelByDate(localDate);
+
+        if (availabilitiesOfDay.isEmpty()) {
+            throw new IllegalStateException("there is no availabilities for this day");
+        }
+
+
+
+        return availabilitiesOfDay;
     }
 
     //	public List<String> hello() {

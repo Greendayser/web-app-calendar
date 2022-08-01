@@ -16,4 +16,8 @@ public interface ReservationsRepository extends JpaRepository<ReservationsModel,
     @Query("SELECT r FROM ReservationsModel r WHERE r.date = :date AND r.start = :start")
     Optional<ReservationsModel> findReservationsModelByDateAndStart(LocalDate date, String start);
 
+    @Query("SELECT r FROM ReservationsModel r WHERE r.id = :id AND r.email = :email")
+    Optional<ReservationsModel> findReservationsModelByIdAndEmail(Long id, String email);
+
+
 }

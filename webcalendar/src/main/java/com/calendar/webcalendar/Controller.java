@@ -7,7 +7,9 @@ import com.calendar.webcalendar.service.ReservationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "calendar")
@@ -23,12 +25,18 @@ public class Controller {
         this.reservationsService = reservationsService;
     }
 
-    //Availabilities
+    // ########################################AVAILABILITIES############################################
 
     //List the availabilities
     @GetMapping("/availabilities/get")
-    public List<AvailabilitiesModel> getAvailability() {
-        return availabilityService.getAvailability();
+    public List<AvailabilitiesModel> getAllAvailabilities() {
+        return availabilityService.getAllAvailabilities();
+    }
+
+    @GetMapping("availabilities/get/day/{slotDate}") //slotDate = date of the day select in the front
+    public Collection<Optional<AvailabilitiesModel>> getAvailabiltiesOfDay(@PathVariable("slotDate") String date)
+    {
+        return availabilityService.getAvailabilityOfDay(date);
     }
 
     @PostMapping("/availabilities/post")
@@ -36,7 +44,12 @@ public class Controller {
         availabilityService.addNewAvailability(availabilitiesModel);
     }
 
-    //Reservations
+    @DeleteMapping(path = "/availabilities/delete/{slotId}")
+    public void deleteAvailability(@PathVariable("slotId") Long availabilityId) {
+        availabilityService.deleteSlotAvailability(availabilityId);
+    }
+
+    // ########################################RESERVATIONS#################################
 
     //List the reservations
     @GetMapping("/reservations/get")
@@ -48,6 +61,11 @@ public class Controller {
     @PostMapping("/reservations/post")
     public void createReservation(@RequestBody ReservationsModel reservationsModel) {
         reservationsService.addNewReservation(reservationsModel);
+    }
+
+    @DeleteMapping(path = "/reservations/delete")
+    public void deleteReservation(@RequestBody ReservationsModel reservationsModel) {
+        reservationsService.deleteSlotReservation(reservationsModel);
     }
 
 
