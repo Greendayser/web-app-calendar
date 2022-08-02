@@ -24,7 +24,7 @@ public class AvailabilitiesService {
         return availabilityRepository.findAll();
     }
 
-    public void addNewAvailability(AvailabilitiesModel availabilitiesModel) {
+    public AvailabilitiesModel addNewAvailability(AvailabilitiesModel availabilitiesModel) {
         Optional<AvailabilitiesModel> availableByDateAndStart = availabilityRepository
                 .findAvailabilitiesModelByDateAndStart(
                         availabilitiesModel.getDate(),
@@ -39,17 +39,17 @@ public class AvailabilitiesService {
 
         //save new availability in the calendar database
         availabilityRepository.save(availabilitiesModel);
-
-        System.out.println(availabilitiesModel);
+        return availabilitiesModel;
     }
 
-    public void deleteSlotAvailability(Long AvailabilityId) {
+    public Long deleteSlotAvailability(Long AvailabilityId) {
         boolean exists = availabilityRepository.existsById(AvailabilityId);
         if (!exists) {
             throw new IllegalStateException("availabilty slot with id " + AvailabilityId + " does not exists");
         }
         availabilityRepository.deleteById(AvailabilityId);
 
+        return AvailabilityId;
     }
 
     public Collection<Optional<AvailabilitiesModel>> getAvailabilityOfDay(String date) {

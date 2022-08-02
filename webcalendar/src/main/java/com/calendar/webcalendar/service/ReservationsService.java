@@ -23,7 +23,7 @@ public class ReservationsService {
         return reservationsRepository.findAll();
     }
 
-    public void addNewReservation(ReservationsModel reservationsModel) {
+    public ReservationsModel addNewReservation(ReservationsModel reservationsModel) {
         Optional<ReservationsModel> reservationsByDateAndStart = reservationsRepository
                 .findReservationsModelByDateAndStart(
                         reservationsModel.getDate(),
@@ -32,16 +32,16 @@ public class ReservationsService {
 
 
         if (reservationsByDateAndStart.isPresent()) {
-            throw new IllegalStateException("this reservationSlot (Date and Start) is already taken: reservation present in database");
+            throw new IllegalStateException("this reservation slot is already taken: reservation present in database");
         }
 
         reservationsRepository.save(reservationsModel);
 
-        System.out.println(reservationsModel);
+        return reservationsModel;
 
     }
 
-    public void deleteSlotReservation(ReservationsModel reservationsModel) {
+    public ReservationsModel deleteSlotReservation(ReservationsModel reservationsModel) {
 
         boolean exists = reservationsRepository.existsById(reservationsModel.getId());
 
@@ -65,5 +65,6 @@ public class ReservationsService {
 
         reservationsRepository.deleteById(reservationsModel.getId());
 
+        return reservationsModel;
     }
 }

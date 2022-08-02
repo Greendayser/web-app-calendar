@@ -6,10 +6,28 @@ import Time from './Time.js'
 
 let dataArr = new Set()
 
+function formatDate(date) {
+  var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+  if (month.length < 2) 
+      month = '0' + month;
+  if (day.length < 2) 
+      day = '0' + day;
+
+  return [year, month, day].join('-');
+}
+
 function parseDatas (date) {
   dataArr.clear()
-  dataArr.add(date)
+  let dateFormat = formatDate(date)
+  dataArr.add(dateFormat)
+  console.log(dateFormat)
 }
+
+
 
 function App() {
 
@@ -26,21 +44,14 @@ function App() {
           onClickDay={() => setShowTime(true)}
         />
 
-        {parseDatas(date.toDateString())}
+        {parseDatas(date)}
 
-        {date.length > 0 ? (
-          <p>
-            <span>Start:</span>{' '} {date[0].toDateString()}
-            {' '} to {' '}
-            <span>End:</span> {date[1].toDateString()}
-          </p>
-
-          ) : (
+        
           
-          <p style={{position: 'relative'}}>
-            <span>Selected date:</span>{' '} {date.toDateString()}
-          </p>
-          )}
+        <p style={{position: 'relative'}}>
+          <span>Selected date:</span>{' '} {date.toDateString()}
+        </p>
+        
 
         <Time showTime={showTime} date ={date}/>
 

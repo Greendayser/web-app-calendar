@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin()
 @RestController
 @RequestMapping(path = "calendar")
 public class Controller {
@@ -40,13 +41,13 @@ public class Controller {
     }
 
     @PostMapping("/availabilities/post")
-    public void createAvailability(@RequestBody AvailabilitiesModel availabilitiesModel) {
-        availabilityService.addNewAvailability(availabilitiesModel);
+    public AvailabilitiesModel createAvailability(@RequestBody AvailabilitiesModel availabilitiesModel) {
+        return availabilityService.addNewAvailability(availabilitiesModel);
     }
 
     @DeleteMapping(path = "/availabilities/delete/{slotId}")
-    public void deleteAvailability(@PathVariable("slotId") Long availabilityId) {
-        availabilityService.deleteSlotAvailability(availabilityId);
+    public Long deleteAvailability(@PathVariable("slotId") Long availabilityId) {
+        return availabilityService.deleteSlotAvailability(availabilityId);
     }
 
     // ########################################RESERVATIONS#################################
@@ -59,19 +60,13 @@ public class Controller {
 
     //create a reservation and later delete from availability
     @PostMapping("/reservations/post")
-    public void createReservation(@RequestBody ReservationsModel reservationsModel) {
-        reservationsService.addNewReservation(reservationsModel);
+    public ReservationsModel createReservation(@RequestBody ReservationsModel reservationsModel) {
+        return reservationsService.addNewReservation(reservationsModel);
     }
 
     @DeleteMapping(path = "/reservations/delete")
-    public void deleteReservation(@RequestBody ReservationsModel reservationsModel) {
-        reservationsService.deleteSlotReservation(reservationsModel);
+    public ReservationsModel deleteReservation(@RequestBody ReservationsModel reservationsModel) {
+        return reservationsService.deleteSlotReservation(reservationsModel);
     }
 
-
-//	@GetMapping
-//	public List<String> hello() {
-//		//need to find a way to convert Sat Jul 30 2022 in front to 2022-07-30 the localDateFormat => then change attribut to String to LocalDate in model
-//		return List.of("Hello", "World!");
-//	}
 }
