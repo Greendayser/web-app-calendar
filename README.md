@@ -1,5 +1,5 @@
 # web-app-calendar
-Basic schedule for the reservation of time slots
+Basic schedule to reserve time slots
 
 ## Installation
 
