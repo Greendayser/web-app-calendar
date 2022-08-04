@@ -6,7 +6,7 @@ import Time from './Time.js'
 
 let dataArr = new Set()
 
-function formatDate(date) {
+export function formatDate(date) {
   var d = new Date(date),
       month = '' + (d.getMonth() + 1),
       day = '' + d.getDate(),
@@ -24,7 +24,7 @@ function parseDatas (date) {
   dataArr.clear()
   let dateFormat = formatDate(date)
   dataArr.add(dateFormat)
-  console.log(dateFormat)
+  // console.log(dateFormat)
 }
 
 
@@ -32,7 +32,8 @@ function parseDatas (date) {
 function App() {
 
  const [date, setDate] = useState(new Date())
- const [showTime, setShowTime] = useState(false) 
+ const [showTime, setShowTime] = useState(false)
+ const [datesformat, setDatesfotmat] = useState(formatDate(new Date()))
 
  return (
  <div className="app">
@@ -53,7 +54,7 @@ function App() {
         </p>
         
 
-        <Time showTime={showTime} date ={date}/>
+        <Time showTime={showTime} date ={date} dateform = {formatDate(date)}/>
 
    </div>
   </div>

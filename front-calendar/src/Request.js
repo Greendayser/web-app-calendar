@@ -130,6 +130,16 @@ const deleteAvailability = async function(id) { // id = id of the availability
 }
 
 
+export {
+  getAllAvailabilities,
+  getAllReservations,
+  getAvailabilitiesOfDay,
+  postAvailability,
+  postReservation,
+  deleteAvailability,
+  deleteReservation
+}
+
 //  getAllReservations()
 
 // getAvailabilitiesOfDay("2022-08-02")

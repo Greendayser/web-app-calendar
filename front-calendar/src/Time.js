@@ -7,7 +7,7 @@ function Time(props) {
  
  return (
  <div className='.app > div:nth-child(4)'>
-  {props.showTime ? <Times date={props.date}/> : null}
+  {props.showTime ? <Times date={props.date} datesform={props.datesform}/> : null}
  </div>
   )
 }
