@@ -14,7 +14,11 @@ Or \
 You can change the config.properties in webcalendar folder \
 If you want to set another username or password according to your role 
 
-## front-calendar (front-end)
+## front-calendar (front end)
+
+### `npm install`
+
+Run this command to install the module packages needed for the front end
 
 ### `npm start`
 
@@ -22,7 +26,7 @@ Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser. 
 
 
-## webcalendar (Backend)
+## webcalendar (Back end)
 
 Run the WebcalendarApplication.java file\
 Now you can make requests on http://localhost:8080/url (url could be availabilities/get for example) \
