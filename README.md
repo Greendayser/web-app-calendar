@@ -4,8 +4,23 @@ Basic schedule to reserve time slots
 ## Installation
 
 You need to install postgresql \
-Give the priviledges to your role or use the role 'postgres' \
-Create a database name: 'calendar'
+
+Create a database `calendar` 
+
+`CREATE DATABASE calendar;`
+
+Give the priviledges to your role or use the role 'postgres'
+
+`GRANT ALL PRIVILEGES ON DATABASE "calendar" TO "postgres";`
+
+Connect to the database "calendar"
+
+`\c calendar postgres` with postgres your role 
+
+Give a password to your role to match the one in config.properties in webcalendar/src/main/resources 
+
+`ALTER USER postgres WITH PASSWORD 'password'`
+
 
 ## Config
 Pick the role: 'postgres' \
@@ -30,4 +45,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 Run the WebcalendarApplication.java file\
 Now you can make requests on http://localhost:8080/url (url could be availabilities/get for example) \
-Or simply open Request.http to test the requests 
+Or simply open `Request.http` to test the requests on the backend if you use `intellij idea` \
+Or use`Postman` and copy the request present in `Request.http`
